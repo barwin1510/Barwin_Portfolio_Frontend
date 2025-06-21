@@ -3,6 +3,13 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Spinner from "../spinner/Spinner.jsx";
+import emailIcon from "../assets/images/email.png";
+import phoneIcon from "../assets/images/phone.png";
+import locationIcon from "../assets/images/location.png";
+import linkedinIcon from "../assets/images/linkedin.png";
+import instagramIcon from "../assets/images/instagram.png";
+import facebookIcon from "../assets/images/facebook.png";
+import chessIcon from "../assets/images/chess.png";
 
 const Contact = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -27,8 +34,8 @@ const Contact = () => {
 
     try {
       const apiUrl = import.meta.env.VITE_BACKEND_URL;
-      console.log(apiUrl)
-      const response = await axios.post(apiUrl+"/api/mail/send", formData);
+      console.log(apiUrl);
+      const response = await axios.post(apiUrl + "/api/mail/send", formData);
 
       if (response.status === 200) {
         toast.success("Email sent successfully!");
@@ -45,13 +52,48 @@ const Contact = () => {
   };
 
   const contactInfo = [
-    { icon: "📧", title: "Email", value: "barwin15102001@gmail.com", link: "mailto:barwin15102001@gmail.com" },
-    { icon: "📱", title: "Phone", value: "+91 6379278539", link: "tel:+916379278539" },
-    { icon: "📍", title: "Location", value: "Kanyakumari, India", link: "#" },
-    { icon: "💼", title: "LinkedIn", value: "barwin raj", link: "https://www.linkedin.com/in/barwin-raj-375604324/" },
-    { icon: "📸", title: "Instagram", value: "barwin_2001", link: "https://www.instagram.com/barwin_2001/" },
-    { icon: "📘", title: "Facebook", value: "Barwin Raj", link: "https://www.facebook.com/barwin.raj.2025" },
-    { icon: "♟️", title: "Chess", value: "Barwin_2001", link: "https://www.chess.com/member/barwin_2001" },
+    {
+      icon: emailIcon,
+      title: "Email",
+      value: "barwin15102001@gmail.com",
+      link: "mailto:barwin15102001@gmail.com",
+    },
+    {
+      icon: phoneIcon,
+      title: "Phone",
+      value: "+91 6379278539",
+      link: "tel:+916379278539",
+    },
+    {
+      icon: locationIcon,
+      title: "Location",
+      value: "Kanyakumari, India",
+      link: "#",
+    },
+    {
+      icon: linkedinIcon,
+      title: "LinkedIn",
+      value: "barwin raj",
+      link: "https://www.linkedin.com/in/barwin-raj-375604324/",
+    },
+    {
+      icon: instagramIcon,
+      title: "Instagram",
+      value: "barwin_2001",
+      link: "https://www.instagram.com/barwin_2001/",
+    },
+    {
+      icon: facebookIcon,
+      title: "Facebook",
+      value: "Barwin Raj",
+      link: "https://www.facebook.com/barwin.raj.2025",
+    },
+    {
+      icon: chessIcon,
+      title: "Chess",
+      value: "Barwin_2001",
+      link: "https://www.chess.com/member/barwin_2001",
+    },
   ];
 
   return (
@@ -78,10 +120,22 @@ const Contact = () => {
             <div className="contact-details">
               {contactInfo.map((info, index) => (
                 <div key={index} className="contact-item">
-                  <div className="contact-icon">{info.icon}</div>
+                  <div className="contact-icon">
+                    <img
+                      src={info.icon}
+                      alt={`${info.title} icon`}
+                      width="24"
+                      height="24"
+                    />
+                  </div>
                   <div className="contact-text">
                     <h4>{info.title}</h4>
-                    <a href={info.link} className="contact-link" target="_blank" rel="noreferrer">
+                    <a
+                      href={info.link}
+                      className="contact-link"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
                       {info.value}
                     </a>
                   </div>
@@ -150,8 +204,9 @@ const Contact = () => {
           </form>
         </div>
       </div>
-
-      <ToastContainer position="top-right" autoClose={3000} />
+      <div style={{ position: "absolute", top: 0, right: 0 }}>
+        <ToastContainer position="top-right" autoClose={3000} />
+      </div>
       {isLoading && <Spinner />}
     </section>
   );
